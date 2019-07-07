@@ -2,22 +2,26 @@ package com.ityang.micro.eurekaserver.controller;
 
 import com.netflix.discovery.DiscoveryClient;
 import com.netflix.discovery.EurekaClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Set;
 
 /**
  * @author: yangchangkui
  * @date: 2018-11-19 15:25
  */
+
+@RestController
 public class HelloController {
 
     @Resource
     DiscoveryClient client;
 
-    public String getMessage(){
-        String services = "Services: " + client.getAllKnownRegions();
-        System.out.println(services);
-        return services;
+    @RequestMapping("getAllKnownRegions")
+    public Set<String> getMessage(){
+        return client.getAllKnownRegions();
     }
 
 
